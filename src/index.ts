@@ -1,0 +1,24 @@
+import CSVReader from './service/csv-reader'
+import path from 'path'
+
+const filePath = path.resolve(__dirname, 'public/matrix.csv')
+
+const getData = async () => {
+	const reader = new CSVReader()
+	let data: string[] = []
+	try {
+		data = await reader.read('')
+		console.log("afff")
+		data.forEach((value) => console.log(value))
+	}
+	catch(e) {
+		console.log("deu ruim")
+	}
+
+}
+
+getData()
+
+
+
+
