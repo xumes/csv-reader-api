@@ -107,4 +107,36 @@ describe('CSV Reader service', () => {
 			expect(result).toBe(362880)
 		})
 	})
+
+	describe('invert', () => {
+		it('should throw error when no data is provided', async () => {
+			const reader = new CSVReader()
+
+			await expect(reader.invert(null as any)).rejects.toThrow(
+				new Error('Invalid data')
+			)
+		})
+
+		it('should throw error when no data is not an array', async () => {
+			const reader = new CSVReader()
+
+			await expect(reader.invert('1, 2, 3' as any)).rejects.toThrow(
+				new Error('Invalid data')
+			)
+		})
+
+		it('should return the matrix as a string in matrix format where the columns and rows are inverted on success', async () => {
+			const fileData = [
+				['1', '4', '7'],
+				['2', '5', '8'],
+				['3', '6', '9'],
+			]
+			const fileMock = path.resolve(__dirname, 'mock.csv')
+			const reader = new CSVReader()
+			const data = await reader.read(fileMock)
+			const result = await reader.invert(data)
+
+			expect(result).toEqual(fileData)
+		})
+	})
 })
