@@ -35,4 +35,20 @@ export default class CSVReader {
 
 		return result
 	}
+
+	async multiply(data: number[][]): Promise<number> {
+		if (!data || !Array.isArray(data)) {
+			throw new Error('Invalid data')
+		}
+
+		let result = 1
+
+		data.forEach((d: number[]) => {
+			result = result * d.reduce((total: any, num: any) => {
+				return parseInt(total) * parseInt(num)
+			})
+		})
+
+		return result
+	}
 }

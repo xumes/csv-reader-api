@@ -13,6 +13,8 @@ const getData = async () => {
 		console.log('flatten', await reader.flatten(data))
 
 		console.log('sum', await reader.sum(data))
+
+		console.log('multiply', await reader.multiply(data))
 	} catch (e) {
 		console.log(e)
 	}
