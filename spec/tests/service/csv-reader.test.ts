@@ -203,4 +203,23 @@ describe('CSV Reader service', () => {
 			expect(isValid).toBe(true)
 		})
 	})
+
+	describe('format', () => {
+		it('should return a string with line break', async () => {
+			const fileData = [
+				[1, 2, 3],
+				[4, 5, 6],
+				[7, 8, 9],
+			]
+			const expected = `1,2,3
+4,5,6
+7,8,9`
+			const reader = new CSVReader()
+
+			const formatted = reader.format(fileData)
+			expect(formatted).toEqual(expected)
+		})
+
+		
+	})
 })
