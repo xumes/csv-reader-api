@@ -27,6 +27,15 @@ export default class CSVReader {
 		return true
 	}
 
+	format(data: number[][]): string {
+		let resultString = ''
+		data.forEach(value => {
+			resultString = resultString.concat(`${value.toString()}\n`) 
+		})
+
+		return resultString.trim()
+	}
+
 	async flatten(data: number[][]): Promise<string> {
 		if (!data || !Array.isArray(data)) {
 			throw new Error('Invalid data')

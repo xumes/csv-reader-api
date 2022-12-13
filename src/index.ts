@@ -8,18 +8,15 @@ const getData = async () => {
 	let data: number[][] = []
 	try {
 		data = await reader.read(filePath)
-		data.forEach((value) => console.log(value))
 
-		console.log('is valid', reader.validate(data))
-
-		console.log('flatten', await reader.flatten(data))
-
-		console.log('sum', await reader.sum(data))
-
-		console.log('multiply', await reader.multiply(data))
+		console.log('echo\n', reader.format(data))
+		console.log('is valid\n', reader.validate(data))
+		console.log('flatten\n', await reader.flatten(data))
+		console.log('sum\n', await reader.sum(data))
+		console.log('multiply\n', await reader.multiply(data))
 
 		const inverted = await reader.invert(data)
-		inverted.forEach((value: number) => console.log(value))
+		console.log('inverted\n', reader.format(inverted))
 	} catch (e) {
 		console.log(e)
 	}
