@@ -13,7 +13,7 @@ export default class CSVReader {
 	}
 
 	validate(data: number[][]): boolean {
-		const width = data.length || 0
+		const width = Array.isArray(data) ? data.length : 0
 		const heigh = Array.isArray(data[0]) ? data[0].length : 0 
 
 		if (width === 0 || heigh ===0 ) {
