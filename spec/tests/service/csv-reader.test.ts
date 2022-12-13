@@ -17,7 +17,7 @@ describe('CSV Reader service', () => {
 			['4', '5', '6'],
 			['7', '8', '9'],
 		]
-		const fileMock = path.resolve(__dirname, 'matrix.csv')
+		const fileMock = path.resolve(__dirname, 'mock.csv')
 		const reader = new CSVReader()
 		const result = await reader.read(fileMock)
 
