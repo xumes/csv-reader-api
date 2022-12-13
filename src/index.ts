@@ -10,11 +10,16 @@ const getData = async () => {
 		data = await reader.read(filePath)
 		data.forEach((value) => console.log(value))
 
+		console.log('is valid', reader.validate(data))
+
 		console.log('flatten', await reader.flatten(data))
 
 		console.log('sum', await reader.sum(data))
 
 		console.log('multiply', await reader.multiply(data))
+
+		const inverted = await reader.invert(data)
+		inverted.forEach((value: number) => console.log(value))
 	} catch (e) {
 		console.log(e)
 	}

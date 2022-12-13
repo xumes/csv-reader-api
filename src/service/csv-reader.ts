@@ -12,6 +12,21 @@ export default class CSVReader {
 		return (await csv.parse(csvString)) as number[][]
 	}
 
+	validate(data: number[][]): boolean {
+		const width = data.length || 0
+		const heigh = Array.isArray(data[0]) ? data[0].length : 0 
+
+		if (width === 0 || heigh ===0 ) {
+			return false
+		}
+
+		if (width !== heigh) {
+			return false
+		}
+
+		return true
+	}
+
 	async flatten(data: number[][]): Promise<string> {
 		if (!data || !Array.isArray(data)) {
 			throw new Error('Invalid data')
@@ -50,5 +65,14 @@ export default class CSVReader {
 		})
 
 		return result
+	}
+
+	async invert(data: any[][]): Promise<any> {
+		if (!data || !Array.isArray(data)) {
+			throw new Error('Invalid data')
+		}
+
+		return Object.keys(data[0])
+			.map(col => data.map(row => row[parseInt(col)]))
 	}
 }
