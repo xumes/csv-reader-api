@@ -1,26 +1,26 @@
 {
-  "extends": "ts-node/node16/tsconfig.json",
-  "ts-node": {
-    // It is faster to skip typechecking.
-    // Remove if you want ts-node to do typechecking.
-    "transpileOnly": true,
-    "files": true,
-    "compilerOptions": {
-      // compilerOptions specified here will override those declared below,
-      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
-      // different options with a single tsconfig.json.
-    }
-  },
-  "compilerOptions": {
-    "target": "es2017" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
-    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
-    "outDir": "dist" /* Redirect output structure to the directory. */,
-    "strict": true /* Enable all strict type-checking options. */,
-    "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
-    "useUnknownInCatchVariables": false
-  },
-  "include": ["src/**/*.ts", "spec/**/*.ts"]
+	"extends": "ts-node/node16/tsconfig.json",
+	"ts-node": {
+		// It is faster to skip typechecking.
+		// Remove if you want ts-node to do typechecking.
+		"transpileOnly": true,
+		"files": true,
+		"compilerOptions": {
+			// compilerOptions specified here will override those declared below,
+			// but *only* in ts-node.  Useful if you want ts-node and tsc to use
+			// different options with a single tsconfig.json.
+		}
+	},
+	"compilerOptions": {
+		"target": "es2017" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
+		"module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+		"outDir": "dist" /* Redirect output structure to the directory. */,
+		"strict": true /* Enable all strict type-checking options. */,
+		"baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
+		"esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
+		"skipLibCheck": true /* Skip type checking of declaration files. */,
+		"forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
+		"useUnknownInCatchVariables": false
+	},
+	"include": ["src/**/*.ts", "spec/**/*.ts"]
 }

@@ -9,15 +9,9 @@ const getData = async () => {
 	try {
 		data = await reader.read(filePath)
 		data.forEach((value) => console.log(value))
-	}
-	catch(e) {
+	} catch (e) {
 		console.log(e)
 	}
-
 }
 
 getData()
-
-
-
-
