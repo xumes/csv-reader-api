@@ -7,12 +7,11 @@ const getData = async () => {
 	const reader = new CSVReader()
 	let data: string[] = []
 	try {
-		data = await reader.read('')
-		console.log("afff")
+		data = await reader.read(filePath)
 		data.forEach((value) => console.log(value))
 	}
 	catch(e) {
-		console.log("deu ruim")
+		console.log(e)
 	}
 
 }
