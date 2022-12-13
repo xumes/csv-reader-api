@@ -5,12 +5,14 @@ const filePath = path.resolve(__dirname, 'public/matrix.csv')
 
 const getData = async () => {
 	const reader = new CSVReader()
-	let data: string[] = []
+	let data: number[][] = []
 	try {
 		data = await reader.read(filePath)
 		data.forEach((value) => console.log(value))
 
-		reader.flatten(data)
+		console.log('flatten', await reader.flatten(data))
+
+		console.log('sum', await reader.sum(data))
 	} catch (e) {
 		console.log(e)
 	}
