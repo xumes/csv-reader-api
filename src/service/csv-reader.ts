@@ -11,4 +11,12 @@ export default class CSVReader {
 
 		return (await csv.parse(csvString)) as string[]
 	}
+
+	async flatten(data: string[]): Promise<string> {
+		if (!data || !Array.isArray(data)) {
+			throw new Error('Invalid data')
+		}
+
+		return data.toString()
+	}
 }

@@ -9,9 +9,13 @@ const getData = async () => {
 	try {
 		data = await reader.read(filePath)
 		data.forEach((value) => console.log(value))
+
+		reader.flatten(data)
 	} catch (e) {
 		console.log(e)
 	}
+
+
 }
 
 getData()
