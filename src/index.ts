@@ -14,8 +14,6 @@ const getData = async () => {
 	} catch (e) {
 		console.log(e)
 	}
-
-
 }
 
 getData()
