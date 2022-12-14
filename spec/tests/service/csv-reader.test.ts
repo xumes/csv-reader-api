@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CSVReader from '../../../src/service/csv-reader'
 import path from 'path'
 import {

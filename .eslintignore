@@ -2,6 +2,7 @@
 /.github/
 /.husky/
 /coverage/
+/.package.json
 /.package-lock.json
 /dist/
 lint-staged.config.js

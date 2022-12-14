@@ -24,3 +24,19 @@ export class ParamNotANumberError extends Error {
 		super(ParamNotANumberError.Msg)
 	}
 }
+
+export class RouteNotFoundError extends Error {
+	public static readonly Msg = 'Route does not exist.'
+
+	constructor() {
+		super(RouteNotFoundError.Msg)
+	}
+}
+
+export class ServerError extends Error {
+	public static readonly Msg = 'Internal Server Error.'
+
+	constructor() {
+		super(ServerError.Msg)
+	}
+}
