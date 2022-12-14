@@ -1,10 +1,11 @@
 import fs from 'fs/promises'
 import csv from 'async-csv'
+import { ParamInvalidError, ParamMissingError } from '../@shared/errors'
 
 export default class CSVReader {
 	async read(fileInput: string): Promise<number[][]> {
 		if (!fileInput) {
-			throw new Error('File Not Found!')
+			throw new ParamMissingError()
 		}
 
 		const csvString = await fs.readFile(fileInput, 'utf-8')
@@ -13,6 +14,10 @@ export default class CSVReader {
 	}
 
 	validate(data: number[][]): boolean {
+		if (!data) {
+			return false
+		}
+
 		const width = Array.isArray(data) ? data.length : 0
 		const heigh = Array.isArray(data[0]) ? data[0].length : 0 
 
@@ -37,16 +42,16 @@ export default class CSVReader {
 	}
 
 	async flatten(data: number[][]): Promise<string> {
-		if (!data || !Array.isArray(data)) {
-			throw new Error('Invalid data')
+		if (!this.validate(data)) {
+			throw new ParamInvalidError()
 		}
 
 		return data.toString()
 	}
 
 	async sum(data: number[][]): Promise<number> {
-		if (!data || !Array.isArray(data)) {
-			throw new Error('Invalid data')
+		if (!this.validate(data)) {
+			throw new ParamInvalidError()
 		}
 
 		let result = 0
@@ -61,8 +66,8 @@ export default class CSVReader {
 	}
 
 	async multiply(data: number[][]): Promise<number> {
-		if (!data || !Array.isArray(data)) {
-			throw new Error('Invalid data')
+		if (!this.validate(data)) {
+			throw new ParamInvalidError()
 		}
 
 		let result = 1
@@ -77,8 +82,8 @@ export default class CSVReader {
 	}
 
 	async invert(data: any[][]): Promise<any> {
-		if (!data || !Array.isArray(data)) {
-			throw new Error('Invalid data')
+		if (!this.validate(data)) {
+			throw new ParamInvalidError()
 		}
 
 		return Object.keys(data[0])

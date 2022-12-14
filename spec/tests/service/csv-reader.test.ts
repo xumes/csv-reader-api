@@ -1,14 +1,15 @@
 import CSVReader from '../../../src/service/csv-reader'
 import path from 'path'
+import { ParamInvalidError, ParamMissingError } from '../../../src/@shared/errors'
 
 describe('CSV Reader service', () => {
 	describe('read', () => {
-		it('should throw FileNotFoundError when a file is not provided', async () => {
+		it('should throw ParamMissingError when a file is not provided', async () => {
 			const file = ''
 			const reader = new CSVReader()
 
 			await expect(reader.read(file)).rejects.toThrow(
-				new Error('File Not Found!')
+				new ParamMissingError()
 			)
 		})
 
@@ -27,19 +28,19 @@ describe('CSV Reader service', () => {
 	})
 
 	describe('flatten', () => {
-		it('should throw error when no data is provided', async () => {
+		it('should throw ParamInvalidError when no data is provided', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.flatten(null as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
-		it('should throw error when no data is not an array', async () => {
+		it('should throw ParamInvalidError when no data is not an array', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.flatten('1, 2, 3' as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
@@ -55,19 +56,19 @@ describe('CSV Reader service', () => {
 	})
 
 	describe('sum', () => {
-		it('should throw error when no data is provided', async () => {
+		it('should throw ParamInvalidError when no data is provided', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.sum(null as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
-		it('should throw error when no data is not an array', async () => {
+		it('should throw ParamInvalidError when no data is not an array', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.sum('1, 2, 3' as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
@@ -82,19 +83,19 @@ describe('CSV Reader service', () => {
 	})
 
 	describe('multiply', () => {
-		it('should throw error when no data is provided', async () => {
+		it('should throw ParamInvalidError when no data is provided', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.multiply(null as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
-		it('should throw error when no data is not an array', async () => {
+		it('should throw ParamInvalidError when no data is not an array', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.multiply('1, 2, 3' as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
@@ -109,19 +110,19 @@ describe('CSV Reader service', () => {
 	})
 
 	describe('invert', () => {
-		it('should throw error when no data is provided', async () => {
+		it('should throw ParamInvalidError when no data is provided', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.invert(null as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
-		it('should throw error when no data is not an array', async () => {
+		it('should throw ParamInvalidError when no data is not an array', async () => {
 			const reader = new CSVReader()
 
 			await expect(reader.invert('1, 2, 3' as any)).rejects.toThrow(
-				new Error('Invalid data')
+				new ParamInvalidError()
 			)
 		})
 
