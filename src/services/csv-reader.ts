@@ -7,7 +7,7 @@ import {
 	ParamNotANumberError,
 } from '../@shared/errors'
 
-export default class CSVReader {
+class CSVReader {
 	async read(fileInput: string): Promise<number[][]> {
 		if (!fileInput) {
 			throw new ParamMissingError()
@@ -106,3 +106,5 @@ export default class CSVReader {
 		)
 	}
 }
+
+export default new CSVReader()

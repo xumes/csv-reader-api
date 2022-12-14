@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CSVReader from '../../../src/service/csv-reader'
+import CSVReader from '../../../src/services/csv-reader'
 import path from 'path'
 import {
 	ParamInvalidError,
@@ -10,9 +10,8 @@ describe('CSV Reader service', () => {
 	describe('read', () => {
 		it('should throw ParamMissingError when a file is not provided', async () => {
 			const file = ''
-			const reader = new CSVReader()
 
-			await expect(reader.read(file)).rejects.toThrow(
+			await expect(CSVReader.read(file)).rejects.toThrow(
 				new ParamMissingError()
 			)
 		})
@@ -24,8 +23,7 @@ describe('CSV Reader service', () => {
 				['7', '8', '9'],
 			]
 			const fileMock = path.resolve(__dirname, 'mock.csv')
-			const reader = new CSVReader()
-			const result = await reader.read(fileMock)
+			const result = await CSVReader.read(fileMock)
 
 			expect(result).toEqual(fileData)
 		})
@@ -33,17 +31,13 @@ describe('CSV Reader service', () => {
 
 	describe('flatten', () => {
 		it('should throw ParamInvalidError when no data is provided', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.flatten(null as any)).rejects.toThrow(
+			await expect(CSVReader.flatten(null as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamInvalidError when no data is not an array', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.flatten('1, 2, 3' as any)).rejects.toThrow(
+			await expect(CSVReader.flatten('1, 2, 3' as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
@@ -51,9 +45,9 @@ describe('CSV Reader service', () => {
 		it('should return the matrix as a 1 line string, with values separated by commas on success', async () => {
 			const fileData = '1,2,3,4,5,6,7,8,9'
 			const fileMock = path.resolve(__dirname, 'mock.csv')
-			const reader = new CSVReader()
-			const data = await reader.read(fileMock)
-			const result = await reader.flatten(data)
+
+			const data = await CSVReader.read(fileMock)
+			const result = await CSVReader.flatten(data)
 
 			expect(result).toBe(fileData)
 		})
@@ -61,38 +55,32 @@ describe('CSV Reader service', () => {
 
 	describe('sum', () => {
 		it('should throw ParamInvalidError when no data is provided', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.sum(null as any)).rejects.toThrow(
+			await expect(CSVReader.sum(null as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamInvalidError when no data is not an array', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.sum('1, 2, 3' as any)).rejects.toThrow(
+			await expect(CSVReader.sum('1, 2, 3' as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamNotANumberError when one or more element in the array is not a number', async () => {
-			const reader = new CSVReader()
 			const input = [
 				[1, 2, 3],
 				[4, 'S', 6],
 			]
 
-			await expect(reader.sum(input as any)).rejects.toThrow(
+			await expect(CSVReader.sum(input as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should return the sum of the integers in the matrix on success', async () => {
 			const fileMock = path.resolve(__dirname, 'mock.csv')
-			const reader = new CSVReader()
-			const data = await reader.read(fileMock)
-			const result = await reader.sum(data)
+			const data = await CSVReader.read(fileMock)
+			const result = await CSVReader.sum(data)
 
 			expect(result).toBe(45)
 		})
@@ -100,38 +88,33 @@ describe('CSV Reader service', () => {
 
 	describe('multiply', () => {
 		it('should throw ParamInvalidError when no data is provided', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.multiply(null as any)).rejects.toThrow(
+			await expect(CSVReader.multiply(null as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamInvalidError when no data is not an array', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.multiply('1, 2, 3' as any)).rejects.toThrow(
+			await expect(CSVReader.multiply('1, 2, 3' as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamNotANumberError when one or more element in the array is not a number', async () => {
-			const reader = new CSVReader()
 			const input = [
 				[1, 2, 3],
 				[4, 'S', 6],
 			]
 
-			await expect(reader.multiply(input as any)).rejects.toThrow(
+			await expect(CSVReader.multiply(input as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should return the product of the integers in the matrix on success', async () => {
 			const fileMock = path.resolve(__dirname, 'mock.csv')
-			const reader = new CSVReader()
-			const data = await reader.read(fileMock)
-			const result = await reader.multiply(data)
+
+			const data = await CSVReader.read(fileMock)
+			const result = await CSVReader.multiply(data)
 
 			expect(result).toBe(362880)
 		})
@@ -139,17 +122,13 @@ describe('CSV Reader service', () => {
 
 	describe('invert', () => {
 		it('should throw ParamInvalidError when no data is provided', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.invert(null as any)).rejects.toThrow(
+			await expect(CSVReader.invert(null as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
 
 		it('should throw ParamInvalidError when no data is not an array', async () => {
-			const reader = new CSVReader()
-
-			await expect(reader.invert('1, 2, 3' as any)).rejects.toThrow(
+			await expect(CSVReader.invert('1, 2, 3' as any)).rejects.toThrow(
 				new ParamInvalidError()
 			)
 		})
@@ -161,9 +140,9 @@ describe('CSV Reader service', () => {
 				['3', '6', '9'],
 			]
 			const fileMock = path.resolve(__dirname, 'mock.csv')
-			const reader = new CSVReader()
-			const data = await reader.read(fileMock)
-			const result = await reader.invert(data)
+
+			const data = await CSVReader.read(fileMock)
+			const result = await CSVReader.invert(data)
 
 			expect(result).toEqual(fileData)
 		})
@@ -175,9 +154,8 @@ describe('CSV Reader service', () => {
 				[1, 2, 3],
 				[4, 5, 6],
 			]
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy)
+			const isValid = CSVReader.validate(dummy)
 			expect(isValid).toBe(false)
 		})
 
@@ -188,33 +166,29 @@ describe('CSV Reader service', () => {
 				[7, 8, 9],
 				[10, 11, 12],
 			]
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy)
+			const isValid = CSVReader.validate(dummy)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is not an array', async () => {
 			const dummy = '0'
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy as any)
+			const isValid = CSVReader.validate(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is not a matrix', async () => {
 			const dummy = [1, 2, 3]
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy as any)
+			const isValid = CSVReader.validate(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is an empty array', async () => {
 			const dummy = [[]]
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy as any)
+			const isValid = CSVReader.validate(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
@@ -224,9 +198,8 @@ describe('CSV Reader service', () => {
 				[4, 5, 6],
 				[7, 8, 9],
 			]
-			const reader = new CSVReader()
 
-			const isValid = reader.validate(dummy)
+			const isValid = CSVReader.validate(dummy)
 			expect(isValid).toBe(true)
 		})
 	})
@@ -241,9 +214,8 @@ describe('CSV Reader service', () => {
 			const expected = `1,2,3
 4,5,6
 7,8,9`
-			const reader = new CSVReader()
 
-			const formatted = reader.format(fileData)
+			const formatted = CSVReader.format(fileData)
 			expect(formatted).toEqual(expected)
 		})
 	})
