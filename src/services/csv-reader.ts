@@ -18,7 +18,7 @@ class CSVReader {
 		return (await csv.parse(csvString)) as number[][]
 	}
 
-	validate(data: number[][]): boolean {
+	isValid(data: number[][]): boolean {
 		if (!data) {
 			return false
 		}
@@ -47,7 +47,7 @@ class CSVReader {
 	}
 
 	async flatten(data: number[][]): Promise<string> {
-		if (!this.validate(data)) {
+		if (!this.isValid(data)) {
 			throw new ParamInvalidError()
 		}
 
@@ -55,7 +55,7 @@ class CSVReader {
 	}
 
 	async sum(data: number[][]): Promise<number> {
-		if (!this.validate(data)) {
+		if (!this.isValid(data)) {
 			throw new ParamInvalidError()
 		}
 
@@ -75,7 +75,7 @@ class CSVReader {
 	}
 
 	async multiply(data: number[][]): Promise<number> {
-		if (!this.validate(data)) {
+		if (!this.isValid(data)) {
 			throw new ParamInvalidError()
 		}
 
@@ -97,7 +97,7 @@ class CSVReader {
 	}
 
 	async invert(data: any[][]): Promise<any> {
-		if (!this.validate(data)) {
+		if (!this.isValid(data)) {
 			throw new ParamInvalidError()
 		}
 

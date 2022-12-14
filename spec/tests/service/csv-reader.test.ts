@@ -148,14 +148,14 @@ describe('CSV Reader service', () => {
 		})
 	})
 
-	describe('validate', () => {
+	describe('isValid', () => {
 		it('should return false if array has more cols than rows', async () => {
 			const dummy = [
 				[1, 2, 3],
 				[4, 5, 6],
 			]
 
-			const isValid = CSVReader.validate(dummy)
+			const isValid = CSVReader.isValid(dummy)
 			expect(isValid).toBe(false)
 		})
 
@@ -167,28 +167,28 @@ describe('CSV Reader service', () => {
 				[10, 11, 12],
 			]
 
-			const isValid = CSVReader.validate(dummy)
+			const isValid = CSVReader.isValid(dummy)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is not an array', async () => {
 			const dummy = '0'
 
-			const isValid = CSVReader.validate(dummy as any)
+			const isValid = CSVReader.isValid(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is not a matrix', async () => {
 			const dummy = [1, 2, 3]
 
-			const isValid = CSVReader.validate(dummy as any)
+			const isValid = CSVReader.isValid(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
 		it('should return false the input is an empty array', async () => {
 			const dummy = [[]]
 
-			const isValid = CSVReader.validate(dummy as any)
+			const isValid = CSVReader.isValid(dummy as any)
 			expect(isValid).toBe(false)
 		})
 
@@ -199,7 +199,7 @@ describe('CSV Reader service', () => {
 				[7, 8, 9],
 			]
 
-			const isValid = CSVReader.validate(dummy)
+			const isValid = CSVReader.isValid(dummy)
 			expect(isValid).toBe(true)
 		})
 	})
