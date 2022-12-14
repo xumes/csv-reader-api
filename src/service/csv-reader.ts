@@ -1,6 +1,10 @@
 import fs from 'fs/promises'
 import csv from 'async-csv'
-import { ParamInvalidError, ParamMissingError } from '../@shared/errors'
+import {
+	ParamInvalidError,
+	ParamMissingError,
+	ParamNotANumberError,
+} from '../@shared/errors'
 
 export default class CSVReader {
 	async read(fileInput: string): Promise<number[][]> {
@@ -19,9 +23,9 @@ export default class CSVReader {
 		}
 
 		const width = Array.isArray(data) ? data.length : 0
-		const heigh = Array.isArray(data[0]) ? data[0].length : 0 
+		const heigh = Array.isArray(data[0]) ? data[0].length : 0
 
-		if (width === 0 || heigh ===0 ) {
+		if (width === 0 || heigh === 0) {
 			return false
 		}
 
@@ -34,8 +38,8 @@ export default class CSVReader {
 
 	format(data: number[][]): string {
 		let resultString = ''
-		data.forEach(value => {
-			resultString = resultString.concat(`${value.toString()}\n`) 
+		data.forEach((value) => {
+			resultString = resultString.concat(`${value.toString()}\n`)
 		})
 
 		return resultString.trim()
@@ -58,6 +62,10 @@ export default class CSVReader {
 
 		data.forEach((d: number[]) => {
 			result += d.reduce((total: any, num: any) => {
+				if (isNaN(num)) {
+					throw new ParamNotANumberError()
+				}
+
 				return parseInt(total) + parseInt(num)
 			})
 		})
@@ -73,9 +81,15 @@ export default class CSVReader {
 		let result = 1
 
 		data.forEach((d: number[]) => {
-			result = result * d.reduce((total: any, num: any) => {
-				return parseInt(total) * parseInt(num)
-			})
+			result =
+				result *
+				d.reduce((total: any, num: any) => {
+					if (isNaN(num)) {
+						throw new ParamNotANumberError()
+					}
+
+					return parseInt(total) * parseInt(num)
+				})
 		})
 
 		return result
@@ -86,7 +100,8 @@ export default class CSVReader {
 			throw new ParamInvalidError()
 		}
 
-		return Object.keys(data[0])
-			.map(col => data.map(row => row[parseInt(col)]))
+		return Object.keys(data[0]).map((col) =>
+			data.map((row) => row[parseInt(col)])
+		)
 	}
 }
