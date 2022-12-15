@@ -1,12 +1,11 @@
 import { Router } from 'express'
+import echo from './echo'
 
 // Export the base-router
 const baseRouter = Router()
 
 // Setup routers
-baseRouter.use('/', (_req, res) => {
-	res.json({ status: 'ok' })
-})
+baseRouter.use('/echo', echo)
 
 // Export default.
 export default baseRouter
