@@ -1,0 +1,15 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "CSV Reader API",
+		"description": "This API can reads, echos back to you, invert, flatten, sum or calculate the product of a quadractic matrix in CSV",
+		"contact": {
+			"email": "reginaldosantos.br@gmail.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.0"
+	}
+}

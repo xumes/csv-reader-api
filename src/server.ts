@@ -1,7 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express'
+import swaggerUi from 'swagger-ui-express'
+
 import { RouteNotFoundError, ServerError } from './@shared/errors'
 import { HttpStatusCode } from './@shared/http-status-code'
 import apiRouter from './routes/api'
+import swaggerDocs from '../docs/swagger.json'
 
 // Constants
 const app = express()
@@ -9,6 +12,7 @@ const app = express()
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 /***********************************************************************************
  *                         API routes and error handling
