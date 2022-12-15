@@ -3,7 +3,7 @@ import multer from 'multer'
 import os from 'os'
 import CSVReader from '../services/csv-reader'
 import { HttpStatusCode } from '../@shared/http-status-code'
-import { ParamMissingError } from '../@shared/errors'
+import { ParamMissingError, ParamNotANumberError } from '../@shared/errors'
 
 const router = Router()
 
@@ -28,9 +28,14 @@ router.use('/', upload.single('file'), async (req, res) => {
 			})
 		}
 
-		res.status(HttpStatusCode.OK).send(CSVReader.format(data))
+		const result = await CSVReader.sum(data)
+
+		res.send(result.toString())
 	} catch (err) {
-		if (err instanceof ParamMissingError) {
+		if (
+			err instanceof ParamMissingError ||
+			err instanceof ParamNotANumberError
+		) {
 			res.status(HttpStatusCode.BAD_REQUEST).json({
 				error: err.message,
 			})

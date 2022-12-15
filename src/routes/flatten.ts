@@ -35,6 +35,10 @@ router.use('/', upload.single('file'), async (req, res) => {
 				error: err.message,
 			})
 		}
+
+		res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+			error: 'Sorry, we are not able to process your request. Try again later.',
+		})
 	}
 })
 
