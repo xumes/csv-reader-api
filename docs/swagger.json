@@ -11,5 +11,274 @@
 			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
 		},
 		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000",
+			"description": "Development"
+		}
+	],
+	"tags": [
+		{
+			"name": "CSV Reader",
+			"description": "All the operations with the CSV file"
+		},
+		{
+			"name": "health",
+			"description": "Api health check"
+		}
+	],
+	"paths": {
+		"/echo": {
+			"post": {
+				"tags": ["CSV Reader"],
+				"summary": "Echo",
+				"description": "Return the matrix as a string in matrix format",
+				"consumes": ["multipart/form-data"],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "file",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+
+				"responses": {
+					"200": {
+						"description": "Echoing the file content",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"$ref": "#/components/schemas/formattedOutput"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "One or more of the required parameters was missing or is invalid."
+					}
+				}
+			}
+		},
+		"/invert": {
+			"post": {
+				"tags": ["CSV Reader"],
+				"summary": "Invert",
+				"description": "Return the matrix as a string in matrix format where the columns and rows are inverted",
+				"consumes": ["multipart/form-data"],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "text/plain",
+								"schema": {
+									"type": "string",
+									"$ref": "#/components/schemas/formattedOutput"
+								}
+							}
+						}
+					}
+				},
+
+				"responses": {
+					"200": {
+						"description": "Inverted file content",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "1,4,7\n2,5,8\n3,5,9"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "One or more of the required parameters was missing or is invalid."
+					}
+				}
+			}
+		},
+		"/flatten": {
+			"post": {
+				"tags": ["CSV Reader"],
+				"summary": "Flatten",
+				"description": "Return the matrix as a 1 line string, with values separated by commas",
+				"consumes": ["multipart/form-data"],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "file",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+
+				"responses": {
+					"200": {
+						"description": "Flattening the file content",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "1,2,3,4,5,6,7,8,9"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "One or more of the required parameters was missing or is invalid."
+					}
+				}
+			}
+		},
+		"/sum": {
+			"post": {
+				"tags": ["CSV Reader"],
+				"summary": "Sum",
+				"description": "Return the sum of the integers in the matrix",
+				"consumes": ["multipart/form-data"],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "file",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+
+				"responses": {
+					"200": {
+						"description": "Echoing the file content",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "45"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "One or more of the required parameters was missing or is invalid."
+					}
+				}
+			}
+		},
+		"/multiply": {
+			"post": {
+				"tags": ["CSV Reader"],
+				"summary": "Multiply",
+				"description": "Return the product of the integers in the matrix",
+				"consumes": ["multipart/form-data"],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "file",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+
+				"responses": {
+					"200": {
+						"description": "Echoing the file content",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "362880"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "One or more of the required parameters was missing or is invalid."
+					}
+				}
+			}
+		},
+		"/status": {
+			"get": {
+				"tags": ["health"],
+				"summary": "Check API status",
+				"description": "Get API status and uptime\n",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/status"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"formattedOutput": {
+				"type": "string",
+				"example": "1,2,3\n4,5,6\n7,8,9",
+				"description": "formatted CSV output"
+			},
+			"status": {
+				"type": "object",
+				"properties": {
+					"uptime": {
+						"type": "integer",
+						"format": "int64",
+						"example": 376.876713628
+					},
+					"message": {
+						"type": "string",
+						"example": "OK"
+					},
+					"timestamp": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1661991786854
+					}
+				},
+				"description": "Api health check"
+			}
+		}
 	}
 }
