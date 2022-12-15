@@ -4,6 +4,7 @@ import path from 'path'
 import {
 	ParamInvalidError,
 	ParamMissingError,
+	ParamNotANumberError,
 } from '../../../src/@shared/errors'
 
 describe('CSV Reader service', () => {
@@ -70,10 +71,11 @@ describe('CSV Reader service', () => {
 			const input = [
 				[1, 2, 3],
 				[4, 'S', 6],
+				[7, 8, 9],
 			]
 
 			await expect(CSVReader.sum(input as any)).rejects.toThrow(
-				new ParamInvalidError()
+				new ParamNotANumberError()
 			)
 		})
 
@@ -103,10 +105,11 @@ describe('CSV Reader service', () => {
 			const input = [
 				[1, 2, 3],
 				[4, 'S', 6],
+				[7, 8, 9],
 			]
 
 			await expect(CSVReader.multiply(input as any)).rejects.toThrow(
-				new ParamInvalidError()
+				new ParamNotANumberError()
 			)
 		})
 
